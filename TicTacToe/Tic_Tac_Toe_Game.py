@@ -13,7 +13,7 @@ else:
 
 winner = None
 gameRunning = True
-
+timeIsUp = False
 
 
 #GameBoard
@@ -27,16 +27,15 @@ def pBoard(board):
 #Take PlayerInput
 
 def pInput(board):
-    inp = int(input("Enter a number between 1-9:"))
-    if inp >= 1 and inp <= 9:
-        if board[inp-1] == "-":
-            board[inp-1] = currentPlayer
-            return True
-        else:
-            print("Spot already used")
-            return False
+    inp = input("Enter a number between 1-9:")
+    while not inp.isdigit() or int(inp) < 1 or int(inp) > 9:
+        inp = input("Invalid input. Please enter a number between 1-9: ")
+    inp = int(inp)
+    if board[inp-1] == "-":
+        board[inp-1] = currentPlayer
+        return True
     else:
-        print("Out of bounds")
+        print("Spot already used")
         return False
 
 def CheckHorizontal(board):
